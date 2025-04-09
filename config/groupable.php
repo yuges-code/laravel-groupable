@@ -1,6 +1,7 @@
 <?php
 
-// Config for vendor/template
+// Config for yuges/groupable
+
 return [
     # code...
 ];

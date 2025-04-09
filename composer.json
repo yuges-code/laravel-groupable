@@ -1,17 +1,17 @@
 {
-    "name": "yuges-code/laravel-package-template",
-    "description": "🚀 Starter template for all Yuges Laravel packages",
+    "name": "yuges-code/laravel-groupable",
+    "description": "🗃️ Package for easily attaching groups to Laravel eloquent models",
     "keywords": [
         "php",
         "yuges",
+        "groups",
         "laravel",
-        "package",
-        "template"
+        "package"
     ],
-    "homepage": "https://yuges-code.github.io/laravel-package-template",
+    "homepage": "https://yuges-code.github.io/laravel-groupable",
     "support": {
-        "source": "https://github.com/yuges-code/laravel-package-template",
-        "issues": "https://github.com/yuges-code/laravel-package-template/issues"
+        "source": "https://github.com/yuges-code/laravel-groupable",
+        "issues": "https://github.com/yuges-code/laravel-groupable/issues"
     },
     "license": "MIT",
     "authors": [
@@ -30,14 +30,14 @@
     },
     "autoload": {
         "psr-4": {
-            "Yuges\\LaravelPackageTemplate\\": "src",
-            "Yuges\\LaravelPackageTemplate\\Database\\Seeders\\": "database/seeders/",
-            "Yuges\\LaravelPackageTemplate\\Database\\Factories\\": "database/factories/"
+            "Yuges\\Groupable\\": "src",
+            "Yuges\\Groupable\\Database\\Seeders\\": "database/seeders/",
+            "Yuges\\Groupable\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Yuges\\Package\\Tests\\": "tests/src"
+            "Yuges\\Groupable\\Tests\\": "tests/src"
         }
     },
     "scripts": {
@@ -46,7 +46,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Yuges\\LaravelPackageTemplate\\Providers\\TemplateServiceProvider"
+                "Yuges\\Groupable\\Providers\\TemplateServiceProvider"
             ]
         }
     },
