@@ -23,7 +23,8 @@
     ],
     "require": {
         "php": "^8.4",
-        "yuges-code/laravel-package": "^1.0"
+        "yuges-code/laravel-package": "^1.0",
+        "yuges-code/laravel-sluggable": "^1.0"
     },
     "require-dev": {
         "orchestra/testbench": "^10.0"
@@ -46,7 +47,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Yuges\\Groupable\\Providers\\TemplateServiceProvider"
+                "Yuges\\Groupable\\Providers\\GroupableServiceProvider"
             ]
         }
     },

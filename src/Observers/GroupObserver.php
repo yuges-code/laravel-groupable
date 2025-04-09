@@ -1,10 +1,10 @@
 <?php
 
-namespace Vendor\Template\Observers;
+namespace Yuges\Groupable\Observers;
 
-use Illuminate\Database\Eloquent\Model;
+use Yuges\Package\Models\Model;
 
-class TemplateObserver
+class GroupObserver
 {
     public function saving(Model $model): void
     {
