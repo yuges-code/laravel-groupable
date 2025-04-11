@@ -7,7 +7,11 @@ use Yuges\Groupable\Models\Group;
 use Illuminate\Support\Collection;
 use Yuges\Groupable\Models\Groupable;
 use Yuges\Groupable\Observers\GroupObserver;
+use Yuges\Groupable\Actions\SyncGroupsAction;
+use Yuges\Groupable\Actions\AttachGroupsAction;
+use Yuges\Groupable\Actions\DetachGroupsAction;
 use Yuges\Groupable\Observers\GroupableObserver;
+use Yuges\Groupable\Interfaces\Groupable as GroupableInterface;
 
 class Config extends \Yuges\Package\Config\Config
 {
@@ -63,5 +67,47 @@ class Config extends \Yuges\Package\Config\Config
     public static function getGroupableObserverClass(mixed $default = null): string
     {
         return self::get('models.Groupable.observer', $default);
+    }
+
+    public static function getSyncGroupsAction(
+        GroupableInterface $groupable,
+        mixed $default = null
+    ): SyncGroupsAction
+    {
+        return self::getSyncGroupsActionClass($default)::create($groupable);
+    }
+
+    /** @return class-string<SyncGroupsAction> */
+    public static function getSyncGroupsActionClass(mixed $default = null): string
+    {
+        return self::get('actions.sync', $default);
+    }
+
+    public static function getAttachGroupsAction(
+        GroupableInterface $groupable,
+        mixed $default = null
+    ): AttachGroupsAction
+    {
+        return self::getAttachGroupsActionClass($default)::create($groupable);
+    }
+
+    /** @return class-string<AttachGroupsAction> */
+    public static function getAttachGroupsActionClass(mixed $default = null): string
+    {
+        return self::get('actions.attach', $default);
+    }
+
+    public static function getDetachGroupsAction(
+        GroupableInterface $groupable,
+        mixed $default = null
+    ): DetachGroupsAction
+    {
+        return self::getDetachGroupsActionClass($default)::create($groupable);
+    }
+
+    /** @return class-string<DetachGroupsAction> */
+    public static function getDetachGroupsActionClass(mixed $default = null): string
+    {
+        return self::get('actions.detach', $default);
     }
 }

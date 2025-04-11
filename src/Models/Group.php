@@ -5,6 +5,7 @@ namespace Yuges\Groupable\Models;
 use Yuges\Package\Models\Model;
 use Yuges\Groupable\Config\Config;
 use Yuges\Sluggable\Traits\HasSlug;
+use Yuges\Groupable\Traits\HasParent;
 use Yuges\Sluggable\Options\SlugOptions;
 use Yuges\Sluggable\Interfaces\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class Group extends Model implements Sluggable
 {
-    use HasFactory, HasSlug;
+    use HasFactory, HasParent, HasSlug;
 
     protected $table = 'groups';
 
