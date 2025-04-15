@@ -28,8 +28,22 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
 
-            $table->keyMorphs(Config::getGroupableKeyType(KeyType::BigInteger), 'groupable');
+            $table->keyMorphs(
+                Config::getGroupableKeyType(KeyType::BigInteger),
+                Config::getGroupableRelationName('groupable')
+            );
 
+            Config::getPermissionsAnonymous(false)
+                ? $table->nullableKeyMorphs(
+                    Config::getGrouperatorKeyType(KeyType::BigInteger),
+                    Config::getGrouperatorRelationName('grouperator')
+                )
+                : $table->keyMorphs(
+                    Config::getGrouperatorKeyType(KeyType::BigInteger),
+                    Config::getGrouperatorRelationName('grouperator')
+                );
+
+            $table->order();
             $table->unique(['group_id', 'groupable_id', 'groupable_type']);
 
             $table->timestamps();

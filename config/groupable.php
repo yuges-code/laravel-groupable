@@ -22,15 +22,34 @@ return [
                     # models...
                 ],
             ],
+            'relation' => [
+                'name' => 'groupable',
+            ],
             'observer' => Yuges\Groupable\Observers\GroupableObserver::class,
+        ],
+        'grouperator' => [
+            'key' => Yuges\Package\Enums\KeyType::BigInteger,
+            'default' => [
+                'class' => \App\Models\User::class,
+            ],
+            'allowed' => [
+                'classes' => [
+                    \App\Models\User::class,
+                ],
+            ],
+            'relation' => [
+                'name' => 'grouperator',
+            ],
         ],
     ],
 
-    'permissions' => [],
+    'permissions' => [
+        'anonymous' => false,
+    ],
 
     'actions' => [
-        // 'sync' => Yuges\Topicable\Actions\SyncTopicAction::class,
-        // 'attach' => Yuges\Topicable\Actions\AttachTopicAction::class,
-        // 'detach' => Yuges\Topicable\Actions\DetachTopicAction::class,
+        'sync' => Yuges\Groupable\Actions\SyncGroupsAction::class,
+        'attach' => Yuges\Groupable\Actions\AttachGroupsAction::class,
+        'detach' => Yuges\Groupable\Actions\DetachGroupsAction::class,
     ],
 ];

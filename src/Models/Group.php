@@ -8,6 +8,7 @@ use Yuges\Sluggable\Traits\HasSlug;
 use Yuges\Groupable\Traits\HasParent;
 use Yuges\Sluggable\Options\SlugOptions;
 use Yuges\Sluggable\Interfaces\Sluggable;
+use Yuges\Groupable\Traits\HasGrouperator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
@@ -17,7 +18,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class Group extends Model implements Sluggable
 {
-    use HasFactory, HasParent, HasSlug;
+    use HasFactory, HasParent, HasGrouperator, HasSlug;
 
     protected $table = 'groups';
 

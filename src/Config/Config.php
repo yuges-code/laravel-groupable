@@ -6,6 +6,7 @@ use Yuges\Package\Enums\KeyType;
 use Yuges\Groupable\Models\Group;
 use Illuminate\Support\Collection;
 use Yuges\Groupable\Models\Groupable;
+use Yuges\Groupable\Interfaces\Grouperator;
 use Yuges\Groupable\Observers\GroupObserver;
 use Yuges\Groupable\Actions\SyncGroupsAction;
 use Yuges\Groupable\Actions\AttachGroupsAction;
@@ -55,6 +56,11 @@ class Config extends \Yuges\Package\Config\Config
         return self::get('models.groupable.key', $default);
     }
 
+    public static function getGroupableRelationName(mixed $default = null): string
+    {
+        return self::get('models.groupable.relation.name', $default);
+    }
+
     /** @return Collection<array-key, class-string<Groupable>> */
     public static function getGroupableAllowedClasses(mixed $default = null): Collection
     {
@@ -66,7 +72,36 @@ class Config extends \Yuges\Package\Config\Config
     /** @return class-string<GroupableObserver> */
     public static function getGroupableObserverClass(mixed $default = null): string
     {
-        return self::get('models.Groupable.observer', $default);
+        return self::get('models.groupable.observer', $default);
+    }
+
+    public static function getGrouperatorKeyType(mixed $default = null): KeyType
+    {
+        return self::get('models.grouperator.key', $default);
+    }
+
+    public static function getGrouperatorRelationName(mixed $default = null): string
+    {
+        return self::get('models.grouperator.relation.name', $default);
+    }
+
+    /** @return class-string<Grouperator> */
+    public static function getGrouperatorDefaultClass(mixed $default = null): string
+    {
+        return self::get('models.grouperator.default.class', $default);
+    }
+
+    /** @return Collection<array-key, class-string<Grouperator>> */
+    public static function getGrouperatorAllowedClasses(mixed $default = null): Collection
+    {
+        return Collection::make(
+            self::get('models.grouperator.allowed.classes', $default)
+        );
+    }
+
+    public static function getPermissionsAnonymous(mixed $default = false): bool
+    {
+        return self::get('permissions.anonymous', $default);
     }
 
     public static function getSyncGroupsAction(

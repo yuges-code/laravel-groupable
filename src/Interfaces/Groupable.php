@@ -23,4 +23,6 @@ interface Groupable
     public function detachGroups(Collection $groups): static;
 
     public function syncGroups(Collection $groups): static;
+
+    public function defaultGrouperator(): ?Grouperator;
 }

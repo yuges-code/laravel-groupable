@@ -2,16 +2,17 @@
 
 namespace Yuges\Groupable\Observers;
 
-use Yuges\Package\Models\Model;
+use Yuges\Groupable\Models\Group;
+use Yuges\Groupable\Config\Config;
 
 class GroupObserver
 {
-    public function saving(Model $model): void
+    public function saving(Group $group): void
     {
 
     }
 
-    public function deleted(Model $model): void
+    public function deleted(Group $group): void
     {
 
     }

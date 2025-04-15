@@ -2,7 +2,7 @@
 
 namespace Yuges\Groupable\Observers;
 
-use Yuges\Package\Models\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class GroupableObserver
 {

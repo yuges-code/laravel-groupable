@@ -22,6 +22,16 @@ return new class extends Migration
 
         Schema::create($this->table, function (Blueprint $table) {
             $table->key(Config::getGroupKeyType(KeyType::BigInteger));
+
+            Config::getPermissionsAnonymous(false)
+                ? $table->nullableKeyMorphs(
+                    Config::getGrouperatorKeyType(KeyType::BigInteger),
+                    Config::getGrouperatorRelationName('grouperator')
+                )
+                : $table->keyMorphs(
+                    Config::getGrouperatorKeyType(KeyType::BigInteger),
+                    Config::getGrouperatorRelationName('grouperator')
+                );
         });
 
         Schema::table($this->table, function (Blueprint $table) {

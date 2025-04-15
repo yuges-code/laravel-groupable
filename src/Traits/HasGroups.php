@@ -5,8 +5,10 @@ namespace Yuges\Groupable\Traits;
 use Yuges\Groupable\Models\Group;
 use Illuminate\Support\Collection;
 use Yuges\Groupable\Config\Config;
+use Illuminate\Support\Facades\Auth;
 use Yuges\Groupable\Models\Groupable;
 use Illuminate\Database\Eloquent\Model;
+use Yuges\Groupable\Interfaces\Grouperator;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
@@ -18,14 +20,17 @@ trait HasGroups
     {
         /** @var Model $this */
         return $this
-            ->morphToMany(Config::getGroupClass(Group::class), 'groupable')
+            ->morphToMany(
+                Config::getGroupClass(Group::class),
+                Config::getGroupableRelationName('groupable')
+            )
             ->using(Config::getGroupableClass(Groupable::class))
             ->withTimestamps();
     }
 
-    public function group(Group $group): static
+    public function group(Group $group, ?Grouperator $grouperator = null): static
     {
-        return $this->attachGroup($group);
+        return $this->attachGroup($group, $grouperator);
     }
 
     public function ungroup(Group $group): static
@@ -33,9 +38,9 @@ trait HasGroups
         return $this->detachGroup($group);
     }
 
-    public function attachGroup(Group $group): static
+    public function attachGroup(Group $group, ?Grouperator $grouperator = null): static
     {
-        $this->attachGroups(Collection::make([$group]));
+        $this->attachGroups(Collection::make([$group]), $grouperator);
 
         return $this;
     }
@@ -43,9 +48,9 @@ trait HasGroups
     /**
      * @param Collection<array-key, Group> $groups
      */
-    public function attachGroups(Collection $groups): static
+    public function attachGroups(Collection $groups, ?Grouperator $grouperator = null): static
     {
-        Config::getAttachGroupsAction($this)->execute($groups);
+        Config::getAttachGroupsAction($this)->execute($groups, $grouperator);
 
         return $this;
     }
@@ -75,5 +80,13 @@ trait HasGroups
         Config::getSyncGroupsAction($this)->execute($groups);
 
         return $this;
+    }
+
+    public function defaultGrouperator(): ?Grouperator
+    {
+        /** @var ?Grouperator */
+        $grouperator = Auth::user();
+
+        return $grouperator;
     }
 }
