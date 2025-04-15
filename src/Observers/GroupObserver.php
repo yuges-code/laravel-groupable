@@ -7,6 +7,15 @@ use Yuges\Groupable\Config\Config;
 
 class GroupObserver
 {
+    public function creating(Group $group): void
+    {
+        if ($group->shouldSortWhenCreating()) {
+            if (is_null($group->order)) {
+                $group->setHighestOrderNumber();
+            }
+        }
+    }
+
     public function saving(Group $group): void
     {
 

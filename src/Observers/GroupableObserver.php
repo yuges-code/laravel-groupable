@@ -2,16 +2,25 @@
 
 namespace Yuges\Groupable\Observers;
 
-use Illuminate\Database\Eloquent\Model;
+use Yuges\Groupable\Models\Groupable;
 
 class GroupableObserver
 {
-    public function saving(Model $model): void
+    public function creating(Groupable $groupable): void
+    {
+        if ($groupable->shouldSortWhenCreating()) {
+            if (is_null($groupable->order)) {
+                $groupable->setHighestOrderNumber();
+            }
+        }
+    }
+
+    public function saving(Groupable $groupable): void
     {
 
     }
 
-    public function deleted(Model $model): void
+    public function deleted(Groupable $groupable): void
     {
 
     }

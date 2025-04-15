@@ -5,6 +5,7 @@ namespace Yuges\Groupable\Models;
 use Yuges\Package\Models\Model;
 use Yuges\Groupable\Config\Config;
 use Yuges\Sluggable\Traits\HasSlug;
+use Yuges\Groupable\Traits\HasOrder;
 use Yuges\Groupable\Traits\HasParent;
 use Yuges\Sluggable\Options\SlugOptions;
 use Yuges\Sluggable\Interfaces\Sluggable;
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class Group extends Model implements Sluggable
 {
-    use HasFactory, HasParent, HasGrouperator, HasSlug;
+    use HasFactory, HasParent, HasGrouperator, HasSlug, HasOrder;
 
     protected $table = 'groups';
 
@@ -39,5 +40,13 @@ class Group extends Model implements Sluggable
         $options->union = [];
 
         return $options;
+    }
+
+    public function getHighestOrderNumber(): int
+    {
+        return (int) static::query()
+            ->where('grouperator_id', $this->grouperator_id)
+            ->where('grouperator_type', $this->grouperator_type)
+            ->max($this->determineOrderColumnName());
     }
 }

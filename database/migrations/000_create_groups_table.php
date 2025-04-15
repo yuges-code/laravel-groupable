@@ -43,7 +43,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->string('slug')->unique();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('type')->nullable();
 
             $table->order();
