@@ -5,10 +5,14 @@ namespace Yuges\Groupable\Models;
 use Yuges\Package\Models\Model;
 use Yuges\Groupable\Config\Config;
 use Yuges\Sluggable\Traits\HasSlug;
-use Yuges\Groupable\Traits\HasOrder;
+use Yuges\Orderable\Traits\HasOrder;
 use Yuges\Groupable\Traits\HasParent;
 use Yuges\Sluggable\Options\SlugOptions;
+use Yuges\Orderable\Options\OrderOptions;
 use Yuges\Sluggable\Interfaces\Sluggable;
+use Yuges\Orderable\Interfaces\Orderable;
+use Illuminate\Database\Eloquent\Builder;
+use Yuges\Groupable\Traits\HasGroupables;
 use Yuges\Groupable\Traits\HasGrouperator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -17,9 +21,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $slug
  * @property null|string $type
  */
-class Group extends Model implements Sluggable
+class Group extends Model implements Sluggable, Orderable
 {
-    use HasFactory, HasParent, HasGrouperator, HasSlug, HasOrder;
+    use HasFactory, HasParent, HasGrouperator, HasGroupables, HasSlug, HasOrder;
 
     protected $table = 'groups';
 
@@ -42,11 +46,14 @@ class Group extends Model implements Sluggable
         return $options;
     }
 
-    public function getHighestOrderNumber(): int
+    public function orderable(): OrderOptions
     {
-        return (int) static::query()
+        $options = new OrderOptions();
+
+        $options->query = fn (Builder $builder) => $builder
             ->where('grouperator_id', $this->grouperator_id)
-            ->where('grouperator_type', $this->grouperator_type)
-            ->max($this->determineOrderColumnName());
+            ->where('grouperator_type', $this->grouperator_type);
+
+        return $options;
     }
 }
