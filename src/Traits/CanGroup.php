@@ -4,25 +4,22 @@ namespace Yuges\Groupable\Traits;
 
 use Yuges\Groupable\Models\Group;
 use Yuges\Groupable\Config\Config;
-use Yuges\Groupable\Models\Groupable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
  * @property Collection<array-key, Group> $groups
  */
 trait CanGroup
 {
-    public function groups(): MorphToMany
+    public function groups(): MorphMany
     {
         /** @var Model $this */
         return $this
-            ->morphToMany(
+            ->morphMany(
                 Config::getGroupClass(Group::class),
-                Config::getGroupableRelationName('groupable')
-            )
-            ->using(Config::getGroupableClass(Groupable::class))
-            ->withTimestamps();
+                Config::getGrouperatorRelationName('grouperator')
+            );
     }
 }

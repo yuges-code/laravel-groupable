@@ -2,9 +2,9 @@
 
 namespace Yuges\Groupable\Interfaces;
 
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 interface Grouperator
 {
-    public function groups(): MorphToMany;
+    public function groups(): MorphMany;
 }
