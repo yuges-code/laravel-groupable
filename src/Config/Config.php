@@ -26,7 +26,7 @@ class Config extends \Yuges\Package\Config\Config
     /** @return class-string<Group> */
     public static function getGroupClass(mixed $default = null): string
     {
-        return self::get('model.group.class', $default);
+        return self::get('models.group.class', $default);
     }
 
     public static function getGroupKeyType(mixed $default = null): KeyType
