@@ -29,9 +29,14 @@ class Config extends \Yuges\Package\Config\Config
         return self::get('models.group.class', $default);
     }
 
+    public static function getGroupKeyHas(mixed $default = null): bool
+    {
+        return self::get('models.group.key.has', $default);
+    }
+
     public static function getGroupKeyType(mixed $default = null): KeyType
     {
-        return self::get('models.group.key', $default);
+        return self::get('models.group.key.type', $default);
     }
 
     /** @return class-string<GroupObserver> */
@@ -51,9 +56,14 @@ class Config extends \Yuges\Package\Config\Config
         return self::get('models.groupable.class', $default);
     }
 
+    public static function getGroupableKeyHas(mixed $default = null): bool
+    {
+        return self::get('models.groupable.key.has', $default);
+    }
+
     public static function getGroupableKeyType(mixed $default = null): KeyType
     {
-        return self::get('models.groupable.key', $default);
+        return self::get('models.groupable.key.type', $default);
     }
 
     public static function getGroupableRelationName(mixed $default = null): string
@@ -75,9 +85,14 @@ class Config extends \Yuges\Package\Config\Config
         return self::get('models.groupable.observer', $default);
     }
 
+    public static function getGrouperatorKeyHas(mixed $default = null): bool
+    {
+        return self::get('models.grouperator.key.has', $default);
+    }
+
     public static function getGrouperatorKeyType(mixed $default = null): KeyType
     {
-        return self::get('models.grouperator.key', $default);
+        return self::get('models.grouperator.key.type', $default);
     }
 
     public static function getGrouperatorRelationName(mixed $default = null): string

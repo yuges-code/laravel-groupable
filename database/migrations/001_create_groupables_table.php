@@ -22,6 +22,10 @@ return new class extends Migration
         }
 
         Schema::create($this->table, function (Blueprint $table) {
+            if (Config::getGroupableKeyHas(false)) {
+                $table->key(Config::getGroupableKeyType(KeyType::BigInteger));
+            }
+
             $table
                 ->foreignIdFor(Config::getGroupClass(Group::class))
                 ->constrained()

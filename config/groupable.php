@@ -8,14 +8,20 @@ return [
      */
     'models' => [
         'group' => [
-            'key' => Yuges\Package\Enums\KeyType::BigInteger,
+            'key' => [
+                'has' => true,
+                'type' => Yuges\Package\Enums\KeyType::BigInteger
+            ],
             'table' => 'groups',
             'class' => Yuges\Groupable\Models\Group::class,
             'observer' => Yuges\Groupable\Observers\GroupObserver::class,
         ],
         'groupable' => [
             'table' => 'groupables',
-            'key' => Yuges\Package\Enums\KeyType::BigInteger,
+            'key' => [
+                'has' => false,
+                'type' => Yuges\Package\Enums\KeyType::BigInteger
+            ],
             'class' => Yuges\Groupable\Models\Groupable::class,
             'allowed' => [
                 'classes' => [
@@ -28,7 +34,10 @@ return [
             'observer' => Yuges\Groupable\Observers\GroupableObserver::class,
         ],
         'grouperator' => [
-            'key' => Yuges\Package\Enums\KeyType::BigInteger,
+            'key' => [
+                'has' => true,
+                'type' => Yuges\Package\Enums\KeyType::BigInteger
+            ],
             'default' => [
                 'class' => \App\Models\User::class,
             ],

@@ -21,7 +21,9 @@ return new class extends Migration
         }
 
         Schema::create($this->table, function (Blueprint $table) {
-            $table->key(Config::getGroupKeyType(KeyType::BigInteger));
+            if (Config::getGroupKeyHas(true)) {
+                $table->key(Config::getGroupKeyType(KeyType::BigInteger));
+            }
 
             Config::getPermissionsAnonymous(false)
                 ? $table->nullableKeyMorphs(
