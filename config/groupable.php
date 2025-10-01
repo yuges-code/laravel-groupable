@@ -10,7 +10,7 @@ return [
         'group' => [
             'key' => [
                 'has' => true,
-                'type' => Yuges\Package\Enums\KeyType::BigInteger
+                'type' => Yuges\Package\Enums\KeyType::BigInteger,
             ],
             'table' => 'groups',
             'class' => Yuges\Groupable\Models\Group::class,
@@ -20,7 +20,7 @@ return [
             'table' => 'groupables',
             'key' => [
                 'has' => false,
-                'type' => Yuges\Package\Enums\KeyType::BigInteger
+                'type' => Yuges\Package\Enums\KeyType::BigInteger,
             ],
             'class' => Yuges\Groupable\Models\Groupable::class,
             'allowed' => [
@@ -36,7 +36,7 @@ return [
         'grouperator' => [
             'key' => [
                 'has' => true,
-                'type' => Yuges\Package\Enums\KeyType::BigInteger
+                'type' => Yuges\Package\Enums\KeyType::BigInteger,
             ],
             'default' => [
                 'class' => \App\Models\User::class,
