@@ -17,11 +17,11 @@ return [
             'observer' => Yuges\Groupable\Observers\GroupObserver::class,
         ],
         'groupable' => [
-            'table' => 'groupables',
             'key' => [
                 'has' => false,
                 'type' => Yuges\Package\Enums\KeyType::BigInteger,
             ],
+            'table' => 'groupables',
             'class' => Yuges\Groupable\Models\Groupable::class,
             'allowed' => [
                 'classes' => [
